@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="product/layout::head"></head>
+<body>
+<h1>Danh sách sản phẩm</h1>
+<a th:href="@{/products/create}">Tạo mới sản phẩm</a>
+<form th:action="@{/products/search}" method="get">
+    <div class="col">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <input type="text" class=" me-md-2" placeholder="Search" name="name">
+            <button class="btn btn-primary" type="submit"><i class="fas fa-search"></i> Search</button>
+        </div>
+    </div>
+</form>
+<table id="products">
+    <tr>
+        <th>Mã sản phẩm</th>
+        <th>Tên sản phẩm</th>
+        <th>Giá sản phẩm</th>
+        <th>Mô tả sản phẩm</th>
+        <th>Nhà sản Xuất</th>
+        <th colspan="3">Action</th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.id}"></td>
+        <td th:text="${product.name}"></td>
+        <td th:text="${product.price}"></td>
+        <td th:text="${product.description}"></td>
+        <td th:text="${product.producer}"></td>
+        <td><a th:href="@{/products/edit/__${product.id}__}">Chỉnh sửa</a></td>
+        <td><a th:href="@{/products/delete/__${product.id}__}">Xóa</a></td>
+        <td><a th:href="@{/products/view/__${product.id}__}">Chi tiết</a></td>
+    </tr>
+</table>
+<footer th:replace="product/layout::footer"></footer>
+</body>
+</html>
